@@ -11,6 +11,8 @@ class ImmoScrap(scrapy.Spider):
     
     
     def parse(self, response):
+        with open("res.json", "w") as f:
+            f.write(response.body)
         print("parse response")
         for article in response.css("div.sc-koErNt"):
             title = article.css("div.sc-hycgNl").get()

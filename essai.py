@@ -15,9 +15,9 @@ class ImmoScrap(scrapy.Spider):
         # res = {
         #     'response' : response.body,
         # }
-        # with open("log.json", "w") as j:
-        #     json.dump(res, j)
-        yield { 'response': response.body }
+        with open("log.txt", "w") as j:
+            j.write(response.body)
+        # yield { 'response': response.body }
 
 if __name__ == "__main__":
     # Configuration de la journalisation pour afficher les résultats.
