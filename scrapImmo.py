@@ -1,6 +1,10 @@
 import scrapy
 from scrapy.crawler import CrawlerProcess
 import json
+import re
+
+
+urls2 = 'https://www.seloger.com/list.htm?projects=1&types=2,1&places=[{"inseeCodes":[210292]},{"inseeCodes":[210231]}]&price=NaN/600&surface=40/NaN&rooms=2,3&sort=d_dt_crea&mandatorycommodities=0&furnished=0&enterprise=0&qsVersion=1.0&m=search_refine-redirection-search_results'
 
 class ImmoScrap(scrapy.Spider):
     name = "ImmoScrap"
@@ -10,6 +14,9 @@ class ImmoScrap(scrapy.Spider):
         'FEED_EXPORT_ENCODING' : 'utf-8'
     }
     
+    def contains_word(self, s, words):
+        return any([word in s for word in words])
+
     
     def parse(self, response):
         items = {}
@@ -20,7 +27,9 @@ class ImmoScrap(scrapy.Spider):
             description = article.css("div[data-testid='sl.explore.card-description']::text").get()
             localisation = article.css("div[data-testid='sl.address']::text").get()
             specificite = [spe for spe in article.css("li::text").getall()]
-
+            colocation = self.contains_word(description, ["colocation", "coloc", "Colocation", "Coloc"])
+            studio = self.contains_word(description, ["studio", "Studio"])
+            
             items[i] = {
                 'lien': lien,
                 'type' : typeBien,
@@ -28,6 +37,8 @@ class ImmoScrap(scrapy.Spider):
                 'localisation' : localisation,
                 'specificite' : specificite,
                 'description' : description,
+                'colocation' : colocation,
+                'studio' : studio,
                 'VALIDE' : None
             }
             
