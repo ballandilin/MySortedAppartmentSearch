@@ -12,11 +12,11 @@ class ImmoScrap(scrapy.Spider):
         
     def parse(self, response):
         
-        # res = {
-        #     'response' : response.body,
-        # }
-        with open("log.txt", "w") as j:
-            j.write(response.body)
+        res = {
+            'response' : response.text,
+        }
+        with open("log.json", "w") as j:
+            json.dump(res, j)
         # yield { 'response': response.body }
 
 if __name__ == "__main__":

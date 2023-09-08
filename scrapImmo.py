@@ -11,13 +11,10 @@ class ImmoScrap(scrapy.Spider):
     
     
     def parse(self, response):
-        with open("res.json", "w") as f:
-            f.write(response.body)
-        print("parse response")
-        for article in response.css("div.sc-koErNt"):
-            title = article.css("div.sc-hycgNl").get()
-            prix = article.css("div.sc-AnqlK::text").get()
-            description = article.css("div.sc-eNPDpu").get()
+        for article in response.css('div[data-testid="sl.explore.card-container"]'):
+            title = article.css("div[data-test='sl.title']::text").get()
+            prix = article.css("div[data-test='sl.price-label']::text").get()
+            description = article.css("div[data-testid='sl.explore.card-description']::text").get()
 
             item = {
                 'title': title,
@@ -25,10 +22,12 @@ class ImmoScrap(scrapy.Spider):
                 'description' : description,
             }
             
-            with open("res.json", "w") as f:
+            with open("res.json", "a") as f:
                 json.dump(item, f)
 
-            yield item
+        next_page = response.css('a.next::attr(href)').get()
+        if next_page is not None:
+            yield response.follow(next_page, self.parse)
 
 if __name__ == "__main__":
     # Configuration de la journalisation pour afficher les résultats.
