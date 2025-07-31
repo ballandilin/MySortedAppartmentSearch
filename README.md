@@ -1,10 +1,9 @@
 # MySortedAppartmentSearch
 
-Application Python complète pour automatiser la recherche d'appartements sur SeLoger.com avec scraping, filtrage intelligent et interface graphique interactive.
+Application Python pour la recherche d'appartements sur SeLoger.com avec scraping, filtrage intelligent et interface graphique interactive.
 
 ## 🎯 Fonctionnalités
 
-- **🕷️ Scraping automatisé** : Extraction des annonces depuis SeLoger.com (zone Dijon)
 - **🧠 Filtrage intelligent** : Élimination automatique des colocations, studios et annonces non conformes
 - **📊 Interface graphique** : Visualisation des résultats avec tableaux interactifs et statistiques
 - **📈 Analyse des données** : Statistiques détaillées (prix moyen, surfaces, taux de validation)
