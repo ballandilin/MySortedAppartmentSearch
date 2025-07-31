@@ -1,0 +1,4 @@
+scrapy>=2.5.0
+requests>=2.25.0
+lxml>=4.6.0
+twisted>=21.0.0
