@@ -1,7 +1,7 @@
 # MySortedAppartmentSearch
 
 Application Python pour la recherche d'appartements sur SeLoger.com avec scraping, filtrage intelligent et interface graphique interactive.
-
+https://www.lobstr.io/fr/blog/seloger-api
 ## 🎯 Fonctionnalités
 
 - **🧠 Filtrage intelligent** : Élimination automatique des colocations, studios et annonces non conformes
